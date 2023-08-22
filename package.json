@@ -16,6 +16,7 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.18",
+    "nanoid": "^4.0.2",
     "next": "13.4.18",
     "postcss": "8.4.28",
     "react": "18.2.0",
@@ -26,6 +27,7 @@
     "type-fest": "^4.2.0",
     "typescript": "5.1.6",
     "typesync": "^0.11.1",
-    "zod": "^3.22.1"
+    "zod": "^3.22.1",
+    "zustand": "^4.4.1"
   }
 }

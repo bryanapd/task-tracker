@@ -4,6 +4,8 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useStore } from "../../../store";
+
 const taskSchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -19,13 +21,15 @@ function Task() {
   } = useForm<FormData>({
     resolver: zodResolver(taskSchema),
   });
+  const [state, setState] = React.useState("");
+  const { tasks, removeTask, addTask, toggleCompletedState } = useStore();
 
   const onSubmit = (data: FormData) => {
     console.log("is submitting?", isSubmitting);
     console.log("data", data);
   };
 
-  console.log('errors', errors)
+  console.log("tasks", tasks);
 
   return (
     <div className="max-w-md rounded-lg bg-white p-10">
@@ -39,6 +43,8 @@ function Task() {
             placeholder="Task Title"
             className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-rose-600 focus:outline-none"
             autoComplete="off"
+            onChange={(event) => setState(event.target.value)}
+            value={state}
           />
           {errors?.title && (
             <p className="text-red-600 text-sm">{errors?.title?.message}</p>
@@ -50,12 +56,12 @@ function Task() {
             Title
           </label>
         </div>
-        <div className="mt-10 relative">
-          <input
+        {/* <div className="mt-10 relative">
+          <textarea
             {...register("description", { required: true })}
             id="description"
             name="description"
-            type="text"
+            // type="text"
             placeholder="Task Description"
             className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-rose-600 focus:outline-none"
             autoComplete="off"
@@ -71,12 +77,18 @@ function Task() {
           >
             Description
           </label>
-        </div>
+        </div> */}
 
         <button
-          type="submit"
-          disabled={!isDirty || !isValid || isSubmitting}
-          className="mt-20 block w-full cursor-pointer rounded bg-rose-500 px-4 py-2 text-center font-semibold text-white hover:bg-rose-400 focus:outline-none focus:ring focus:ring-rose-500 focus:ring-opacity-80 focus:ring-offset-2 disabled:opacity-70"
+          // type="submit"
+          // disabled={!isDirty || !isValid || isSubmitting}
+          onClick={() => {
+            if (state.length) {
+              addTask(state);
+              setState("");
+            }
+          }}
+          className="mt-10 block w-full cursor-pointer rounded bg-rose-500 px-4 py-2 text-center font-semibold text-white hover:bg-rose-400 focus:outline-none focus:ring focus:ring-rose-500 focus:ring-opacity-80 focus:ring-offset-2 disabled:opacity-70"
         >
           {isSubmitting ? (
             <div role="status">
@@ -91,7 +103,7 @@ function Task() {
               </svg>
             </div>
           ) : (
-            "Sign In"
+            "Submit"
           )}
         </button>
       </form>
