@@ -2,18 +2,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { nanoid } from "nanoid";
 
-interface Task {
-  id: string;
-  description: string;
-  completed: boolean;
-}
-
-interface TaskState {
-  tasks: Task[];
-  addTask: (description: string) => void;
-  removeTask: (id: string) => void;
-  toggleCompletedState: (id: string) => void;
-}
+import { Task, TaskState } from "@/app/types";
 
 export const useStore = create<TaskState>((set) => ({
   tasks: [],

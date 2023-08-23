@@ -29,16 +29,16 @@ function Task() {
     console.log("data", data);
   };
 
-  console.log("tasks", tasks);
+  console.log("added tasks", tasks);
 
   return (
     <div className="max-w-md rounded-lg bg-white p-10">
       <form action="" method="POST" onSubmit={handleSubmit(onSubmit)}>
         <div className="relative">
           <input
-            {...register("title", { required: true })}
-            id="title"
-            name="title"
+            // {...register("title", { required: true })}
+            // id="title"
+            // name="title"
             type="text"
             placeholder="Task Title"
             className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-rose-600 focus:outline-none"
@@ -56,28 +56,6 @@ function Task() {
             Title
           </label>
         </div>
-        {/* <div className="mt-10 relative">
-          <textarea
-            {...register("description", { required: true })}
-            id="description"
-            name="description"
-            // type="text"
-            placeholder="Task Description"
-            className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:border-rose-600 focus:outline-none"
-            autoComplete="off"
-          />
-          {errors?.description && (
-            <p className="text-red-600 text-sm">
-              {errors?.description?.message}
-            </p>
-          )}
-          <label
-            className="absolute -top-3.5 left-0 text-sm text-gray-600 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600"
-            htmlFor="description"
-          >
-            Description
-          </label>
-        </div> */}
 
         <button
           // type="submit"
@@ -98,9 +76,7 @@ function Task() {
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* SVG for Spinner Animation */}
-              </svg>
+              ></svg>
             </div>
           ) : (
             "Submit"
